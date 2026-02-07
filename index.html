@@ -43,8 +43,6 @@ button {
 }
 
 #no {
-    background: #333;
-    color: white;
     position: fixed;
 }
 
@@ -116,11 +114,27 @@ const noTexts = [
     "Gata. Nu mai negociez 😎"
 ];
 
+let noX = window.innerWidth / 2 + 80;
+let noY = window.innerHeight / 2 + 20;
+
 function moveNo() {
-    const x = Math.random() * (window.innerWidth - 120);
-    const y = Math.random() * (window.innerHeight - 60);
-    no.style.left = x + "px";
-    no.style.top = y + "px";
+    const moveX = (Math.random() * 80) - 40; // stânga-dreapta puțin
+    const moveY = (Math.random() * 60) - 30; // sus-jos puțin
+
+    noX += moveX;
+    noY += moveY;
+
+    // limite ca să nu iasă din ecran
+    const minX = 20;
+    const minY = 20;
+    const maxX = window.innerWidth - 140;
+    const maxY = window.innerHeight - 70;
+
+    noX = Math.max(minX, Math.min(noX, maxX));
+    noY = Math.max(minY, Math.min(noY, maxY));
+
+    no.style.left = noX + "px";
+    no.style.top = noY + "px";
 }
 
 no.addEventListener("mouseover", moveNo);
